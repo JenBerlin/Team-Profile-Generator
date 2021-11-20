@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/JenBerlin/Team-Profile-Generator/issues"
   },
-  "homepage": "https://github.com/JenBerlin/Team-Profile-Generator#readme"
+  "homepage": "https://github.com/JenBerlin/Team-Profile-Generator#readme",
+  "dependencies": {
+    "jest": "^27.3.1"
+  }
 }
