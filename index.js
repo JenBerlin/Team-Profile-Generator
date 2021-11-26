@@ -1,7 +1,9 @@
 const inquirer = require("inquirer");
+const Manager = require("./src/Manager");
+const Engineer = require("./src/Engineer");
+const Intern = require("./src/Intern");
 const generateHTML = require("./src/generateHTML");
 const fs = require("fs");
-const Intern = require("./src/Intern");
 
 const team = [];
 
@@ -120,27 +122,38 @@ function start() {
           answers.officeNumber
         )
       );
-      if (answers.option === "Engineer") {
-        inquirer.prompt(engineerQuestions).then((answers) => {
-          team.push(
-            new Engineer(
-              answers.name,
-              answers.id,
-              answers.email,
-              answers.gitHub
-            )
-          );
-        });
-      } else if (answers.option === "Intern") {
-        inquirer.prompt(internQuestions).then((answers) => {
-          team.push(
-            new Intern(answers.name, answers.id, answers.email, answers.school)
-          );
-        });
-      } else {
-        const htmlString = generateHTML(answers);
-        writeToFile("index.html", htmlString);
+      let end = false;
+      while (!end) {
+        if (answers.option === "Engineer") {
+          inquirer.prompt(engineerQuestions).then((answers) => {
+            team.push(
+              new Engineer(
+                answers.name,
+                answers.id,
+                answers.email,
+                answers.gitHub
+              )
+            );
+            end = answers.option === "Do you want to finish building your team";
+          });
+        } else if (answers.option === "Intern") {
+          inquirer.prompt(internQuestions).then((answers) => {
+            team.push(
+              new Intern(
+                answers.name,
+                answers.id,
+                answers.email,
+                answers.school
+              )
+            );
+            end = answers.option === "Do you want to finish building your team";
+          });
+        } else {
+          end = true;
+        }
       }
+      const htmlString = generateHTML(answers);
+      writeToFile("index.html", htmlString);
     })
     .catch((error) => {
       console.error(error);
