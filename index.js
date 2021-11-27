@@ -7,6 +7,13 @@ const fs = require("fs");
 
 const team = [];
 
+const createAnotherEmployeeQuestion = {
+  type: "list",
+  message: "Select option:",
+  name: "option",
+  choices: ["Engineer", "Intern", "Done"],
+};
+
 const managerQuestions = [
   {
     type: "input",
@@ -28,12 +35,7 @@ const managerQuestions = [
     message: "Office number?",
     name: "officeNumber",
   },
-  {
-    type: "list",
-    message: "Select option:",
-    name: "option",
-    choices: ["Engineer", "Intern", "Finish building my team"],
-  },
+  createAnotherEmployeeQuestion,
 ];
 
 const engineerQuestions = [
@@ -58,16 +60,7 @@ const engineerQuestions = [
     message: "GitHub username?",
     name: "gitHub",
   },
-  {
-    type: "list",
-    message: "Select option:",
-    name: "option",
-    choices: [
-      "Do you want to add another Engineer?",
-      "Do you want to add another Intern",
-      "Do you want to finish building your team",
-    ],
-  },
+  createAnotherEmployeeQuestion,
 ];
 
 const internQuestions = [
@@ -92,16 +85,7 @@ const internQuestions = [
     message: "Visited school?",
     name: "school",
   },
-  {
-    type: "list",
-    message: "Select option:",
-    name: "option",
-    choices: [
-      "Do you want to add another Engineer?",
-      "Do you want to add another Intern",
-      "Do you want to finish building your team",
-    ],
-  },
+  createAnotherEmployeeQuestion,
 ];
 
 function writeToFile(fileName, answers) {
@@ -110,54 +94,39 @@ function writeToFile(fileName, answers) {
   });
 }
 
-function start() {
-  inquirer
-    .prompt(managerQuestions)
-    .then((answers) => {
-      team.push(
-        new Manager(
-          answers.name,
-          answers.id,
-          answers.email,
-          answers.officeNumber
-        )
+async function start() {
+  let answers = await inquirer.prompt(managerQuestions);
+  let employee = new Manager(
+    answers.name,
+    answers.id,
+    answers.email,
+    answers.officeNumber
+  );
+  team.push(employee);
+
+  while (answers.option !== "Done") {
+    if (answers.option === "Engineer") {
+      answers = await inquirer.prompt(engineerQuestions);
+      employee = new Engineer(
+        answers.name,
+        answers.id,
+        answers.email,
+        answers.gitHub
       );
-      let end = false;
-      while (!end) {
-        if (answers.option === "Engineer") {
-          inquirer.prompt(engineerQuestions).then((answers) => {
-            team.push(
-              new Engineer(
-                answers.name,
-                answers.id,
-                answers.email,
-                answers.gitHub
-              )
-            );
-            end = answers.option === "Do you want to finish building your team";
-          });
-        } else if (answers.option === "Intern") {
-          inquirer.prompt(internQuestions).then((answers) => {
-            team.push(
-              new Intern(
-                answers.name,
-                answers.id,
-                answers.email,
-                answers.school
-              )
-            );
-            end = answers.option === "Do you want to finish building your team";
-          });
-        } else {
-          end = true;
-        }
-      }
-      const htmlString = generateHTML(answers);
-      writeToFile("index.html", htmlString);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    } else if (answers.option === "Intern") {
+      answers = await inquirer.prompt(internQuestions);
+      employee = new Intern(
+        answers.name,
+        answers.id,
+        answers.email,
+        answers.school
+      );
+    }
+    team.push(employee);
+  }
+
+  const htmlString = generateHTML(team);
+  writeToFile("index.html", htmlString);
 }
 
 start();
