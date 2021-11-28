@@ -52,4 +52,4 @@ The application has been developed by following a Test Driven Development approa
 - README.md
 
 - GitHub (dev branch): https://github.com/JenBerlin/Team-Profile-Generator/tree/dev
-- Walkthrough-Video: https://drive.google.com/file/d/1Tz3pSJtS88r5wwPcFMTUdy__0--OUH6U/view
+- Walkthrough-Video: https://drive.google.com/file/d/1fyKDyr4wD4V7dnOPGJ1lM171t0YUj6xH/view?usp=sharing
