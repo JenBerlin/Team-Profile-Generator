@@ -1,8 +1,8 @@
-# Homework-09-....
+# 10 Object-Oriented Programming: Team Profile Generator
 
 Table of content
 
-- [Homework-09-....](#homework-09-)
+- [10 Object-Oriented Programming: Team Profile Generator](#10-object-oriented-programming-team-profile-generator)
 - [Description](#description)
 - [Building Structure](#building-structure)
 - [Screenshots](#screenshots)

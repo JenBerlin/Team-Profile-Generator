@@ -22,18 +22,18 @@ function generateHTML(team) {
     >
       <p class="mb-0 h1 text-white font-weight-bold mb-1 mt-1">My Team</p>
     </nav>
-    <div class="container d-flex h-100">`;
+    <div class="container d-flex flex-wrap h-100">`;
   for (const member of team) {
     // console.log(member);
-    html += `<div class="card mx-auto" style="width: 18rem">
+    html += `<div class="card mx-auto mt-5"" style="width: 18rem">
         <div class="card-body bg-light">
           <h2 class="card-title text-danger font-weight-medium">${member.getName()}</h5>
           <h4 class="mb-3 text-primary">
           ${member.getRole()}
           </h6>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID:${member.getId()} </li>
-            <li class="list-group-item">Email:${member.getEmail()}</li>`;
+            <li class="list-group-item">ID: ${member.getId()} </li>
+            <li class="list-group-item">Email: mailto:${member.getEmail()}</li>`;
 
     if (member.getRole() === "Manager") {
       html += `<li class="list-group-item">Office number: ${member.getOfficeNumber()}</li>`;
