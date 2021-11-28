@@ -33,7 +33,7 @@ function generateHTML(team) {
           </h6>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">ID: ${member.getId()} </li>
-            <li class="list-group-item">Email: mailto:${member.getEmail()}</li>`;
+            <li class="list-group-item">Email: ${member.getEmail()}</li>`;
 
     if (member.getRole() === "Manager") {
       html += `<li class="list-group-item">Office number: ${member.getOfficeNumber()}</li>`;
