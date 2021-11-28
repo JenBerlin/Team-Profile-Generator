@@ -19,7 +19,7 @@ The application has been developed by following a Test Driven Development approa
 
 # Screenshots
 
-![Getting Started](./image/1-Screenshot.png)
+![Getting Started](./image/Screenshot-1.png)
 
 # Tech/Framwork used
 
